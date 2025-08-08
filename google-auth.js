@@ -1,11 +1,12 @@
 const { google } = require('googleapis');
-const { JWT } = google.auth;
+const path = require('path');
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
 
-const auth = new JWT({
-  email: process.env.GOOGLE_CLIENT_EMAIL,
-  key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+// Load the key from local file
+const keyPath = path.join(__dirname, 'service-account.json');
+const auth = new google.auth.GoogleAuth({
+  keyFile: keyPath,
   scopes: SCOPES,
 });
 

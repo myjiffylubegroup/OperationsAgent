@@ -1,13 +1,12 @@
 const { google } = require('googleapis');
 const path = require('path');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
+// Path to the Render Secret File
+const keyFilePath = '/etc/secrets/turbodataapi-ca0fce529f90.json';
 
-// Load the key from local file
-const keyPath = path.join(__dirname, 'service-account.json');
 const auth = new google.auth.GoogleAuth({
-  keyFile: keyPath,
-  scopes: SCOPES,
+  keyFile: keyFilePath,
+  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
 });
 
 const drive = google.drive({ version: 'v3', auth });
